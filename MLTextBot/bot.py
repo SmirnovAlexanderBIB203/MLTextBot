@@ -5,7 +5,7 @@ from aiogram import Bot, executor, types
 from aiogram.dispatcher import Dispatcher
 
 from config import API_TOKEN, admin
-from text_recognition import text_recognition
+from OCR import OCR
 
 logging.basicConfig(format=u'%(filename)+13s [ LINE:%(lineno)-4s] %(levelname)-8s [%(asctime)s] %(message)s',
                     level=logging.INFO)
@@ -43,9 +43,14 @@ async def photo(message: types.Message):
     try:
         await message.reply(result)
     except:
-        await message.reply("*Произошла какая-то ошибка*")
+        await message.reply("*Произошла какая-то ошибка(*")
     if message.chat.id != admin:
         await bot.send_message(chat_id=admin, text=f"*{message.from_user.username}*\n{result}")
+
+
+@dp.message_handler()
+async def another_text(message: types.Message):
+    await message.answer("Просто отправьте фото")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import easyocr
 
 
-async def text_recognition(file_path):
+async def OCR(file_path):
     reader = easyocr.Reader(["ru", "en"])
     result = reader.readtext(file_path, detail=0, paragraph=True)
 
